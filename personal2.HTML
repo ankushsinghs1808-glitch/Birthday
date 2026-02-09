@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎉 Happy Birthday 🎉</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      width: 90%;
+      max-width: 700px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease;
+    }
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333;
+    }
+    .page {
+      display: none;
+      animation: fadeIn 0.8s ease, slideUp 0.8s ease;
+    }
+    .page.active {
+      display: block;
+    }
+
+    /* Image styling & animations */
+    .wish-img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin: 20px auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      animation: zoomIn 1s ease;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: white;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(25px); }
+      to { transform: translateY(0); }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Page 1 -->
+    <div class="page active">
+      <h1>🎂 Happy Birthday! 🎂</h1>
+      <img src="download.jpg" class="wish-img" alt="Birthday Decoration">
+      <p>
+        Today is not just another day on the calendar — it’s the celebration of <b>you</b>.
+        A day that reminds the world how lucky it is to have someone as wonderful,
+        kind, and special as you.
+      </p>
+      <p>
+        Let’s begin this little journey of wishes, smiles, and warm words made just for you.
+      </p>
+      <button class="btn" onclick="nextPage()">Next ➡️</button>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="page">
+      <h1>✨ A Beautiful Moment ✨</h1>
+      <img src="download1.jpg" class="wish-img" alt="Birthday Celebration">
+      <p>
+        This smile says it all — joy, warmth, and a heart full of happiness.
+        Moments like these are proof of how special you truly are.
+      </p>
+      <p>
+        May your life always be filled with such glowing moments and unforgettable smiles.
+      </p>
+      <button class="btn" onclick="nextPage()">Next ➡️</button>
+    </div>
+
+    <!-- Page 3 -->
+    <div class="page">
+      <h1>🌸 Heartfelt Wishes 🌸</h1>
+      <img src="download2.jpg" class="wish-img" alt="Birthday Wishes">
+      <p>
+        Wishing you an amazing year filled with love, laughter, and peace.
+        May every dream you hold close to your heart slowly turn into reality.
+      </p>
+      <p>
+        You deserve nothing but the best — today and always.
+      </p>
+      <button class="btn" onclick="nextPage()">Next ➡️</button>
+    </div>
+
+    <!-- Page 4 -->
+    <div class="page">
+      <h1>💖 From the Heart 💖</h1>
+      <p>
+        On your birthday, remember this:
+        you are appreciated, you are loved, and you are never alone.
+      </p>
+      <p>
+        Keep being yourself — the world genuinely needs more people like you.
+      </p>
+      <button class="btn" onclick="nextPage()">Next ➡️</button>
+    </div>
+
+    <!-- Page 5 -->
+    <div class="page">
+      <h1>🎉 One Last Wish 🎉</h1>
+      <p>
+        May this birthday mark the beginning of a year where
+        your dreams feel closer, your heart feels lighter,
+        and your days feel brighter.
+      </p>
+      <p>
+        Happy Birthday once again! 🎂✨
+        Never stop smiling, never stop dreaming.
+      </p>
+      <button class="btn" onclick="restart()">🔁 Read Again</button>
+      <div class="footer">Made with ❤️ just for you</div>
+    </div>
+  </div>
+
+  <script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+
+    function nextPage() {
+      pages[currentPage].classList.remove('active');
+      currentPage = (currentPage + 1) % pages.length;
+      pages[currentPage].classList.add('active');
+    }
+
+    function restart() {
+      pages[currentPage].classList.remove('active');
+      currentPage = 0;
+      pages[currentPage].classList.add('active');
+    }
+  </script>
+</body>
+</html>
