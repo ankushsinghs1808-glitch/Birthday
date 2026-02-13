@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Surprise</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{overflow:hidden;font-family:'Segoe UI',sans-serif;background:black;}
+
+/* Slider */
+.slider{
+display:flex;
+width:500%;
+height:100vh;
+transition:transform 1s ease-in-out;
+}
+
+.page{
+width:100vw;
+height:100vh;
+flex-shrink:0;
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+overflow:hidden;
+color:white;
+padding:20px;
+}
+
+/* Glass Card */
+.card{
+max-width:700px;
+max-height:80vh;
+overflow:auto;
+backdrop-filter:blur(20px);
+background:rgba(255,255,255,0.15);
+padding:40px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 0 50px rgba(255,255,255,0.5);
+animation:fadeIn 1.5s ease;
+z-index:2;
+}
+
+h1{
+font-size:42px;
+margin-bottom:15px;
+animation:glow 2s infinite alternate;
+}
+
+p{
+font-size:18px;
+line-height:1.6;
+margin-bottom:25px;
+white-space:pre-line;
+}
+
+/* Button */
+button{
+padding:14px 35px;
+border:none;
+border-radius:40px;
+font-size:16px;
+cursor:pointer;
+background:linear-gradient(45deg,#ff416c,#ff4b2b);
+color:white;
+font-weight:bold;
+letter-spacing:1px;
+transition:0.4s;
+position:relative;
+overflow:hidden;
+box-shadow:0 0 20px rgba(255,65,108,0.6);
+animation:pulse 1.8s infinite;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 35px rgba(255,75,43,1);
+}
+
+button::before{
+content:"";
+position:absolute;
+top:0;
+left:-75%;
+width:50%;
+height:100%;
+background:rgba(255,255,255,0.4);
+transform:skewX(-20deg);
+transition:0.7s;
+}
+
+button:hover::before{
+left:130%;
+}
+
+/* Birthday Page */
+.page1{
+background:
+linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url("https://image2url.com/r2/default/images/1770918838190-9dda9263-b3cb-482d-a1d0-19c7331cc043.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+}
+
+/* Page 2 */
+.page2{
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+url("https://image2url.com/r2/default/images/1770954709581-87979e5e-a21b-4981-aee5-fd7e2d3b48bf.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+/* ⭐ Memories Page Background Updated */
+.page3{
+background:
+linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)),
+url("https://image2url.com/r2/default/images/1770954709581-87979e5e-a21b-4981-aee5-fd7e2d3b48bf.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+}
+
+/* Other Pages */
+.page4,.page5{
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+url("https://image2url.com/r2/default/images/1770956710729-84966257-c152-4e26-9bb2-eb6dc622f05e.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+/* Cake */
+.cake{
+position:absolute;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+width:160px;
+animation:bounce 2s infinite;
+z-index:1;
+}
+
+/* Balloons */
+.balloon{
+position:absolute;
+width:40px;
+height:60px;
+border-radius:50%;
+animation:floatUp 8s linear infinite;
+z-index:0;
+}
+.balloon::after{
+content:'';
+position:absolute;
+width:2px;
+height:50px;
+background:white;
+left:50%;
+top:60px;
+}
+
+/* Hearts */
+.heart{
+position:absolute;
+font-size:20px;
+animation:floatUp 6s linear infinite;
+z-index:0;
+}
+
+/* Memory Gallery */
+.memory-gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+gap:15px;
+margin-top:15px;
+}
+.memory-gallery img{
+width:100%;
+height:120px;
+border-radius:20px;
+object-fit:cover;
+box-shadow:0 0 25px white;
+transition:0.6s;
+}
+.memory-gallery img:hover{
+transform:scale(1.2) rotate(5deg);
+}
+
+/* Dots */
+.dots{
+position:absolute;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:10px;
+z-index:3;
+}
+.dot{
+width:12px;
+height:12px;
+background:white;
+border-radius:50%;
+opacity:0.5;
+transition:0.3s;
+}
+.dot.active{
+opacity:1;
+transform:scale(1.2);
+}
+
+/* Animations */
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+@keyframes glow{
+from{text-shadow:0 0 10px white;}
+to{text-shadow:0 0 25px yellow;}
+}
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(30px);}
+to{opacity:1;transform:translateY(0);}
+}
+@keyframes floatUp{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+@keyframes bounce{
+0%,100%{transform:translateX(-50%) translateY(0);}
+50%{transform:translateX(-50%) translateY(-20px);}
+}
+@keyframes pulse{
+0%{box-shadow:0 0 15px rgba(255,65,108,0.6);}
+50%{box-shadow:0 0 35px rgba(255,75,43,1);}
+100%{box-shadow:0 0 15px rgba(255,65,108,0.6);}
+}
+
+@media(max-width:600px){
+h1{font-size:28px;}
+p{font-size:15px;}
+.card{padding:25px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="slider" id="slider">
+
+<!-- Page 1 -->
+<div class="page page1">
+<div class="card">
+<h1>🎂 Happy Birthday Sars 🎂</h1>
+<p>May your day be filled with love, cake & endless happiness 🎉</p>
+<button onclick="nextPage()">💌 A Special Message is Waiting...</button>
+</div>
+<img class="cake" src="https://pngimg.com/uploads/cake/cake_PNG13127.png">
+</div>
+
+<!-- Page 2 -->
+<div class="page page2">
+<div class="card">
+<h1>💌 Special Message</h1>
+<p>You are my Bestfriend, my happiness & my forever ❤️
+
+Remember when we thought we were so cool? Good times!
+
+Our past memories are proof that we were always crazy together.
+
+We may not meet every day now, but our memories still connect us in the most special way.
+
+Those random days we spent laughing, talking, and doing absolutely nothing turned into the best memories of my life.
+
+Because best friends are the ones who turn ordinary days into unforgettable memories. ✨❤️</p>
+<button onclick="nextPage()">✨ More Memories Await...</button>
+</div>
+</div>
+
+<!-- Page 3 -->
+<div class="page page3">
+<div class="card">
+<h1>📸 Our Memories</h1>
+<div class="memory-gallery">
+<img src="https://image2url.com/r2/default/images/1770955189656-f89528af-9e95-49d4-aead-9fbb162c59a1.jpeg">
+<img src="https://image2url.com/r2/default/images/1770955211138-55a544f4-6759-432b-a22a-a4b2d04bd05c.jpeg">
+<img src="https://image2url.com/r2/default/images/1770955233093-c1ebcf06-9acf-4b39-b70b-0b4d922e2807.jpeg">
+<img src="https://image2url.com/r2/default/images/1770955233093-c1ebcf06-9acf-4b39-b70b-0b4d922e2807.jpeg">
+<img src="https://image2url.com/r2/default/images/1770954709581-87979e5e-a21b-4981-aee5-fd7e2d3b48bf.jpg">
+</div>
+<button onclick="nextPage()">🎁 One More Surprise...</button>
+</div>
+</div>
+
+<!-- Page 4 -->
+<div class="page page4">
+<div class="card">
+<h1>💞 Forever Together 💞</h1>
+<p>You are my today and all of my tomorrows ❤️</p>
+<button onclick="nextPage()">💖 Final Surprise Awaits</button>
+</div>
+</div>
+
+<!-- Page 5 -->
+<div class="page page5">
+<div class="card">
+<h1>💖 Happy Valentine’s & Birthday Sars💖</h1>
+<p>You make your world brighter every single day ❤️</p>
+<p>May your birthday be filled with happiness, surprises, and all the love you truly deserve. And this Valentine’s Day, just remember — you are deeply loved, today and always. 💝
+
+No matter where life takes us, our friendship will always remain my favorite story. 💫
+❤️</p>
+<button onclick="location.reload()">Start Again 🔄</button>
+</div>
+</div>
+
+</div>
+
+<div class="dots">
+<div class="dot active"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+</div>
+
+<script>
+let currentPage=0;
+let dots=document.querySelectorAll(".dot");
+
+function nextPage(){
+if(currentPage<4){
+currentPage++;
+document.getElementById("slider").style.transform=
+"translateX(-"+currentPage*100+"vw)";
+dots.forEach(d=>d.classList.remove("active"));
+dots[currentPage].classList.add("active");
+}
+}
+
+for(let i=0;i<30;i++){
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(heart);
+}
+
+for(let i=0;i<15;i++){
+let balloon=document.createElement("div");
+balloon.className="balloon";
+balloon.style.left=Math.random()*100+"vw";
+balloon.style.background=
+["red","pink","yellow","blue","purple"][Math.floor(Math.random()*5)];
+balloon.style.animationDuration=(6+Math.random()*5)+"s";
+document.body.appendChild(balloon);
+}
+</script>
+
+</body>
+</html>
